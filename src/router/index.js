@@ -1,6 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
+import store from "@/store";
 
 Vue.use(VueRouter);
 
@@ -9,7 +10,7 @@ const routes = [
     path: "/",
     name: "Home",
     props: true,
-    component: Home
+    component: Home,
   },
   /* Lazy Loading the components below 
   with webpacks code splitting feature */
@@ -23,15 +24,35 @@ const routes = [
         path: ":experienceSlug",
         name: "ExperienceDetails",
         props: true,
-        component: () => import("../views/ExperienceDetails.vue")
+        component: () => import("../views/ExperienceDetails.vue"),
+      },
+    ],
+    beforeEnter: (to, from, next) => {
+      const exists = store.destinations.find(
+        (destination) => destination.slug === to.params.slug
+      );
+      if (exists) {
+        next();
+      } else {
+        next({ name: "notFound" });
       }
-    ]
-  }
+    },
+  },
+  {
+    path: "/404",
+    alias: "*",
+    name: "notFound",
+    component: () =>
+      import(
+        /* webpackChunkName: "NotFound" */
+        "../views/NotFound"
+      ),
+  },
 ];
 
 const router = new VueRouter({
   mode: "history",
-  routes
+  routes,
 });
 
 export default router;
