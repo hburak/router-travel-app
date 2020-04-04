@@ -8,18 +8,21 @@ const routes = [
   {
     path: "/",
     name: "Home",
+    props: true,
     component: Home
   },
   /* Lazy Loading the components below 
   with webpacks code splitting feature */
   {
-    path: "/details/:id",
+    path: "/details/:slug",
     name: "DestinationDetails",
+    props: true,
     component: () => import("../views/DestinationDetails.vue")
   }
 ];
 
 const router = new VueRouter({
+  mode: "history",
   routes
 });
 

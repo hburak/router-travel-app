@@ -8,7 +8,7 @@
       </li>
       <li v-for="destination in destinations" :key="destination.name" class="links">
         <router-link
-          :to="{ name: 'DestinationDetails', params: { id: destination.id } }"
+          :to="{ name: 'DestinationDetails', params: { slug: destination.slug } }"
         >{{ destination.name }}</router-link>
       </li>
     </ul>
