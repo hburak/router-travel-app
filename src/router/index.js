@@ -52,6 +52,12 @@ const routes = [
     component: () => import("../views/Login.vue"),
   },
   {
+    path: "/invoices",
+    name: "Invoices",
+    component: () => import("../views/Invoices.vue"),
+    meta: { requiresAuth: true },
+  },
+  {
     path: "/404",
     alias: "*",
     name: "notFound",
@@ -74,6 +80,7 @@ router.beforeEach((to, from, next) => {
     if (!store.user) {
       next({
         name: "Login",
+        query: { redirect: to.fullPath },
       });
     } else {
       next();
