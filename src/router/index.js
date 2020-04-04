@@ -14,10 +14,18 @@ const routes = [
   /* Lazy Loading the components below 
   with webpacks code splitting feature */
   {
-    path: "/details/:slug",
+    path: "/destinations/:slug",
     name: "DestinationDetails",
     props: true,
-    component: () => import("../views/DestinationDetails.vue")
+    component: () => import("../views/DestinationDetails.vue"),
+    children: [
+      {
+        path: ":experienceSlug",
+        name: "ExperienceDetails",
+        props: true,
+        component: () => import("../views/ExperienceDetails.vue")
+      }
+    ]
   }
 ];
 
