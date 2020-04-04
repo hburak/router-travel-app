@@ -36,4 +36,15 @@ export default {
 #nav a.router-link-exact-active {
   color: #42b983;
 }
+
+.input {
+  border: 1px solid green;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+.btn {
+  background-color: green;
+  color: white;
+  padding: 10px;
+}
 </style>
